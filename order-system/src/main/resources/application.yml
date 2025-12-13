@@ -24,11 +24,11 @@ spring:
       properties:
         spring.json.trusted.packages: "*"
     
-    # Topics
-    topics:
-      input: orders-input
-      processed: orders-processed
-      dlq: orders-dlq
+    # Supprimez la section 'topics' si elle cause des problèmes
+    # topics:
+    #   input: "orders-input"
+    #   processed: "orders-processed"
+    #   dlq: "orders-dlq"
 
 # Actuator pour monitoring
 management:

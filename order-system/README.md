@@ -4,9 +4,9 @@ Projet Spring Boot + Apache Kafka pour le traitement de commandes en temps réel
 
 ## 👥 Équipe - Groupe 6
 - **Chiva** - Infrastructure Kafka
-- **Zahra** - Producer
+- **Emane** - Producer
 - **Wethigha** - Consumer basique
-- **Emane** - Traitement + Erreurs + Retry
+- **Zahra** - Traitement + Erreurs + Retry
 - **Aya** - Tests + Documentation
 
 ---
