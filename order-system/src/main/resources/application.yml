@@ -46,3 +46,4 @@ logging:
     root: INFO
     com.kafka.groupe6: DEBUG
     org.springframework.kafka: INFO
+    org.apache.kafka: WARN
