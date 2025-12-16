@@ -1,20 +1,23 @@
-package com.kafka.groupe6.order_system;
-
-import com.kafka.groupe6.order_system.model.Order;
-import com.kafka.groupe6.order_system.producer.OrderProducerService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
+package com.kafka.groupe6.order_system.unit.producer;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+
+import com.kafka.groupe6.order_system.model.Order;
+import com.kafka.groupe6.order_system.producer.OrderProducerService;
 
 @ExtendWith(MockitoExtension.class)
 class OrderProducerTest {
