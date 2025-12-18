@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Groupe 6 - Spring Boot + Kafka</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">🚀 Groupe 6</div>
+        <div class="nav-links">
+            <a href="#accueil" class="nav-link active">Accueil</a>
+            <a href="#architecture" class="nav-link">Architecture</a>
+            <a href="#equipe" class="nav-link">Équipe</a>
+            <a href="#demo" class="nav-link">Démo</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Section Accueil -->
+        <section id="accueil" class="hero">
+            <div class="hero-content">
+                <h1>🛒 Système de Traitement de Commandes</h1>
+                <p class="hero-subtitle">Architecture orientée événements avec Apache Kafka</p>
+                <div class="tech-badges">
+                    <span class="badge">Spring Boot</span>
+                    <span class="badge">Apache Kafka</span>
+                    <span class="badge">Docker</span>
+                    <span class="badge">Java 17</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Objectifs du Projet -->
+        <section class="card">
+            <h2>🎯 Objectifs du Projet</h2>
+            <div class="objectives-grid">
+                <div class="objective-item">
+                    <span class="objective-icon">📚</span>
+                    <h3>Comprendre</h3>
+                    <p>Le modèle producteur/consommateur</p>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">⚙️</span>
+                    <h3>Configurer</h3>
+                    <p>Les topics Kafka et les sérialiseurs</p>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">💻</span>
+                    <h3>Utiliser</h3>
+                    <p>@KafkaListener et KafkaTemplate</p>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">🔄</span>
+                    <h3>Gérer</h3>
+                    <p>Les erreurs et les retries</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Architecture -->
+        <section id="architecture" class="card">
+            <h2>🏗️ Architecture du Système</h2>
+            <div class="architecture-diagram">
+                <div class="arch-layer">
+                    <div class="arch-box client">
+                        <span class="arch-icon">👤</span>
+                        <span class="arch-label">Client</span>
+                        <span class="arch-desc">Interface Web</span>
+                    </div>
+                </div>
+                <div class="arch-arrow">↓</div>
+                <div class="arch-layer">
+                    <div class="arch-box api">
+                        <span class="arch-icon">🌐</span>
+                        <span class="arch-label">REST API</span>
+                        <span class="arch-desc">Spring Boot</span>
+                    </div>
+                </div>
+                <div class="arch-arrow">↓</div>
+                <div class="arch-layer">
+                    <div class="arch-box producer">
+                        <span class="arch-icon">📤</span>
+                        <span class="arch-label">Producer</span>
+                        <span class="arch-desc">KafkaTemplate</span>
+                    </div>
+                </div>
+                <div class="arch-arrow">↓</div>
+                <div class="arch-layer kafka-layer">
+                    <div class="arch-box kafka">
+                        <span class="arch-icon">📨</span>
+                        <span class="arch-label">Apache Kafka</span>
+                        <span class="arch-desc">Message Broker</span>
+                    </div>
+                </div>
+                <div class="arch-arrow">↓</div>
+                <div class="arch-layer">
+                    <div class="arch-box consumer">
+                        <span class="arch-icon">📥</span>
+                        <span class="arch-label">Consumer</span>
+                        <span class="arch-desc">@KafkaListener</span>
+                    </div>
+                </div>
+                <div class="arch-arrow-split">
+                    <span>↙️</span>
+                    <span>↘️</span>
+                </div>
+                <div class="arch-layer split-layer">
+                    <div class="arch-box success">
+                        <span class="arch-icon">✅</span>
+                        <span class="arch-label">Succès</span>
+                        <span class="arch-desc">orders-processed</span>
+                    </div>
+                    <div class="arch-box error">
+                        <span class="arch-icon">❌</span>
+                        <span class="arch-label">Erreur</span>
+                        <span class="arch-desc">orders-dlq</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Topics Kafka -->
+        <section class="card">
+            <h2>📊 Topics Kafka</h2>
+            <div class="topics-grid">
+                <div class="topic-card input">
+                    <div class="topic-icon">📥</div>
+                    <h3>orders-input</h3>
+                    <p>Réception des nouvelles commandes</p>
+                    <span class="topic-status">🟢 Actif</span>
+                </div>
+                <div class="topic-card processed">
+                    <div class="topic-icon">📤</div>
+                    <h3>orders-processed</h3>
+                    <p>Commandes traitées avec succès</p>
+                    <span class="topic-status">🟢 Actif</span>
+                </div>
+                <div class="topic-card dlq">
+                    <div class="topic-icon">⚠️</div>
+                    <h3>orders-dlq</h3>
+                    <p>Dead Letter Queue (erreurs)</p>
+                    <span class="topic-status">🟢 Actif</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Équipe -->
+        <section id="equipe" class="card">
+            <h2>👥 Notre Équipe - Groupe 6</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">👩‍💻</div>
+                    <h3>Chiva</h3>
+                    <p class="member-role">Tâche 1</p>
+                    <p class="member-task">Infrastructure Kafka</p>
+                    <div class="member-items">
+                        <span>✅ Docker Compose</span>
+                        <span>✅ Kafka + Zookeeper</span>
+                        <span>✅ Configuration Topics</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">👩‍💻</div>
+                    <h3>Emane</h3>
+                    <p class="member-role">Tâche 2</p>
+                    <p class="member-task">Producer Service</p>
+                    <div class="member-items">
+                        <span>✅ KafkaTemplate</span>
+                        <span>✅ Envoi messages</span>
+                        <span>✅ Sérialisation JSON</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">👩‍💻</div>
+                    <h3>Zahra</h3>
+                    <p class="member-role">Tâche 3</p>
+                    <p class="member-task">Consumer Basique</p>
+                    <div class="member-items">
+                        <span>✅ @KafkaListener</span>
+                        <span>✅ Réception messages</span>
+                        <span>✅ Désérialisation</span>
+                    </div>
+                </div>
+                <div class="team-member highlight">
+                    <div class="member-avatar">👩‍💻</div>
+                    <h3>Wethigha</h3>
+                    <p class="member-role">Tâche 4</p>
+                    <p class="member-task">Traitement + Erreurs</p>
+                    <div class="member-items">
+                        <span>✅ Validation</span>
+                        <span>✅ Retry (3x)</span>
+                        <span>✅ DLQ</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">👩‍💻</div>
+                    <h3>Aya</h3>
+                    <p class="member-role">Tâche 5</p>
+                    <p class="member-task">Tests + Documentation</p>
+                    <div class="member-items">
+                        <span>✅ Tests unitaires</span>
+                        <span>✅ Tests intégration</span>
+                        <span>✅ Documentation</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Flux de Traitement -->
+        <section class="card">
+            <h2>🔄 Flux de Traitement d'une Commande</h2>
+            <div class="flow-timeline">
+                <div class="flow-step-item">
+                    <div class="flow-number">1</div>
+                    <div class="flow-content">
+                        <h4>📝 Création</h4>
+                        <p>Le client crée une commande via l'API REST</p>
+                    </div>
+                </div>
+                <div class="flow-step-item">
+                    <div class="flow-number">2</div>
+                    <div class="flow-content">
+                        <h4>📤 Production</h4>
+                        <p>Le Producer envoie la commande vers Kafka (orders-input)</p>
+                    </div>
+                </div>
+                <div class="flow-step-item">
+                    <div class="flow-number">3</div>
+                    <div class="flow-content">
+                        <h4>📥 Consommation</h4>
+                        <p>Le Consumer reçoit et traite la commande</p>
+                    </div>
+                </div>
+                <div class="flow-step-item">
+                    <div class="flow-number">4</div>
+                    <div class="flow-content">
+                        <h4>✅ Validation</h4>
+                        <p>Vérification: ID, client, articles, montant (0.01€ - 10000€)</p>
+                    </div>
+                </div>
+                <div class="flow-step-item">
+                    <div class="flow-number">5</div>
+                    <div class="flow-content">
+                        <h4>🔄 Statut</h4>
+                        <p>PENDING → PROCESSING → COMPLETED</p>
+                    </div>
+                </div>
+                <div class="flow-step-item">
+                    <div class="flow-number">6</div>
+                    <div class="flow-content">
+                        <h4>📤 Publication</h4>
+                        <p>Envoi vers orders-processed (succès) ou orders-dlq (erreur)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Gestion des Erreurs -->
+        <section class="card">
+            <h2>⚠️ Gestion des Erreurs et Retry</h2>
+            <div class="error-handling">
+                <div class="retry-config">
+                    <h3>🔄 Configuration Retry</h3>
+                    <table class="config-table">
+                        <tr>
+                            <td>Tentatives max</td>
+                            <td><strong>3</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Délai initial</td>
+                            <td><strong>1 seconde</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Multiplicateur</td>
+                            <td><strong>x2</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Délai max</td>
+                            <td><strong>10 secondes</strong></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="retry-flow">
+                    <h3>📈 Exponential Backoff</h3>
+                    <div class="backoff-steps">
+                        <div class="backoff-step">
+                            <span class="step-num">1</span>
+                            <span class="step-text">Échec → 1s</span>
+                        </div>
+                        <div class="backoff-arrow">→</div>
+                        <div class="backoff-step">
+                            <span class="step-num">2</span>
+                            <span class="step-text">Échec → 2s</span>
+                        </div>
+                        <div class="backoff-arrow">→</div>
+                        <div class="backoff-step">
+                            <span class="step-num">3</span>
+                            <span class="step-text">Échec → 4s</span>
+                        </div>
+                        <div class="backoff-arrow">→</div>
+                        <div class="backoff-step dlq-step">
+                            <span class="step-num">💀</span>
+                            <span class="step-text">DLQ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Démo -->
+        <section id="demo" class="card">
+            <h2>🎮 Démonstration Interactive</h2>
+            <form id="orderForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customerId">👤 Client ID</label>
+                        <input type="text" id="customerId" placeholder="Ex: CUST-001" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">💰 Montant (€)</label>
+                        <input type="number" id="amount" step="0.01" min="0.01" max="10000" placeholder="Ex: 299.99" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="items">📦 Articles (séparés par des virgules)</label>
+                    <input type="text" id="items" placeholder="Ex: Laptop, Souris, Clavier" required>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">📤 Envoyer Commande</button>
+                    <button type="button" id="generateBtn" class="btn btn-secondary">🎲 Générer Aléatoire</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Section Commandes -->
+        <section class="card">
+            <h2>📋 Commandes Récentes</h2>
+            <div id="ordersContainer">
+                <p class="empty-message">Aucune commande pour le moment. Créez-en une via la démo ci-dessus !</p>
+            </div>
+        </section>
+
+        <!-- Section Technologies -->
+        <section class="card">
+            <h2>📦 Technologies Utilisées</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <span class="tech-icon">☕</span>
+                    <span class="tech-name">Java 17</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-icon">🍃</span>
+                    <span class="tech-name">Spring Boot 3</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-icon">📨</span>
+                    <span class="tech-name">Apache Kafka</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-icon">🐳</span>
+                    <span class="tech-name">Docker</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-icon">🧪</span>
+                    <span class="tech-name">JUnit 5</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-icon">📝</span>
+                    <span class="tech-name">Maven</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Tests -->
+        <section class="card">
+            <h2>🧪 Résultats des Tests</h2>
+            <div class="test-results">
+                <div class="test-summary">
+                    <div class="test-stat success">
+                        <span class="stat-number">10</span>
+                        <span class="stat-label">Tests Réussis</span>
+                    </div>
+                    <div class="test-stat">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Échecs</span>
+                    </div>
+                    <div class="test-stat">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Ignorés</span>
+                    </div>
+                </div>
+                <div class="test-badge">
+                    ✅ BUILD SUCCESS
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <h3>🎓 Groupe 6 - Spring Boot + Kafka</h3>
+                <p>Thème : Architecture orientée événements avec Apache Kafka</p>
+                <p>👩‍💻 Chiva • Emane • Zahra • Wethigha • Aya</p>
+                <p class="footer-date">Décembre 2025</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
