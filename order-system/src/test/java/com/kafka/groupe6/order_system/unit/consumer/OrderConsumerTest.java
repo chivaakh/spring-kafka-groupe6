@@ -50,7 +50,8 @@ class OrderConsumerTest {
 
     @BeforeEach
     void setUp() {
-        consumerService = new OrderConsumerService(kafkaTemplate);
+        // Désactiver les échecs de stock aléatoires pour les tests
+        consumerService = new OrderConsumerService(kafkaTemplate, false);
     }
 
     // ==================== TESTS DE TRAITEMENT RÉUSSI ====================

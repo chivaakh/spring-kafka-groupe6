@@ -15,10 +15,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  * Service de consommation et traitement des commandes.
  * 
- * Responsable: EMANE (Tâche 4)
+ * Responsable: WETHIGHA (Tâche 4)
  * 
  * Fonctionnalités:
  * - Réception des messages du topic 'orders-input'
@@ -44,9 +46,21 @@ public class OrderConsumerService {
     
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final Random random = new Random();
+    
+    // Désactive le comportement aléatoire du stock pour les tests
+    @Value("${app.stock.simulate-failures:true}")
+    private boolean simulateStockFailures;
 
+    @org.springframework.beans.factory.annotation.Autowired
     public OrderConsumerService(KafkaTemplate<String, Object> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
+        this.simulateStockFailures = true;
+    }
+    
+    // Constructeur pour les tests (permet de désactiver les échecs aléatoires)
+    public OrderConsumerService(KafkaTemplate<String, Object> kafkaTemplate, boolean simulateStockFailures) {
+        this.kafkaTemplate = kafkaTemplate;
+        this.simulateStockFailures = simulateStockFailures;
     }
 
     @KafkaListener(
@@ -170,12 +184,14 @@ public class OrderConsumerService {
     /**
      * Simule la vérification du stock.
      * Génère aléatoirement une erreur de stock (10% de chance) pour tester le retry.
+     * Ce comportement peut être désactivé via la propriété app.stock.simulate-failures=false
      */
     private void checkStock(Order order) {
         logger.debug("Vérification du stock pour la commande {}", order.getId());
         
         // Simulation: 10% de chance d'échec de stock (pour tester le retry)
-        if (random.nextInt(100) < 10) {
+        // Désactivé si simulateStockFailures = false (pour les tests)
+        if (simulateStockFailures && random.nextInt(100) < 10) {
             String item = order.getItems().get(0);
             throw new StockUnavailableException(order.getId(), item);
         }

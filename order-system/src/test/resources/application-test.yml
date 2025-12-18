@@ -1,0 +1,10 @@
+# Configuration pour les tests
+# Désactive les échecs de stock aléatoires
+app:
+  stock:
+    simulate-failures: false
+
+spring:
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
